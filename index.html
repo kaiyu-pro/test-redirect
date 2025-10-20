@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Redirigiendo…</title>
+  <!-- Fallback meta refresh en 1s -->
+  <meta http-equiv="refresh" content="1;url=REPLACE_WITH_CANONICAL_URL">
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#f7f9fc;color:#10233a}
+    .box{max-width:540px;padding:24px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.08);text-align:center}
+    a{color:#0b66d1}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Redirigiendo a la verificación…</h2>
+    <p>Si tu navegador no redirige automáticamente, pulsa <a id="manual" href="#">aquí</a>.</p>
+    <p style="font-size:13px;color:#6b7280;margin-top:10px">Si este QR fue escaneado desde un móvil, espera unos instantes.</p>
+  </div>
+
+  <script>
+    (function(){
+      // Coloca la URL canónica aquí (sin query). Ejemplo: https://script.google.com/macros/s/ABC123/exec
+      var canonical = 'https://script.google.com/macros/s/AKfycbxGYnd1LhYk-Kxmnq69MfT7L7LyUgg6f5rC9sSzPMWgmJ8WyM8ZFDaom2jbLGaoZmTl3A/exec?id=CT-45950S-E0001&id=zEc98c3Dx5wCLRZqKCsTD69r3qfwmkUc36VPhmpu83k';
+
+      // Si canonical no fue reemplazado, evitamos romper.
+      if (!canonical || canonical.indexOf('REPLACE_WITH_CANONICAL_URL') !== -1) {
+        document.getElementById('manual').textContent = 'Falta configurar la URL canónica en el archivo de redirección.';
+        return;
+      }
+
+      // Recompone query y hash (para que ?id=XYZ llegue intacto)
+      var qs = window.location.search || '';
+      var hash = window.location.hash || '';
+      var target = canonical + qs + hash;
+
+      // Redirigir usando replace (no deja historial)
+      window.location.replace(target);
+
+      // Fallback manual link
+      document.getElementById('manual').href = target;
+    })();
+  </script>
+</body>
+</html>
